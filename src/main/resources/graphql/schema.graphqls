@@ -1,0 +1,41 @@
+type Query {
+    bookById(id: ID): Book
+    findAllBooks: [Book]
+    findAllAuthors: [Author]
+    getException: String
+}
+
+type Book {
+    id: ID
+    name: String
+    pageCount: Int
+    author: Author
+}
+
+type Author {
+    id: ID
+    firstName: String
+    lastName: String
+}
+
+input BookDto {
+    name: String
+    pageCount: Int
+    authorDto: AuthorDto
+}
+
+input AuthorDto {
+    id: ID
+    firstName: String
+    lastName: String
+}
+
+# The Root Mutation for the application
+type Mutation {
+    createBookAuthor(bookDto: BookDto!) : Book!
+    updateBookAuthor(bookDto: BookDto!, id: ID) : Book!
+    createAuthor(firstName: String!, lastName: String) : Author!
+    updateAuthor(id: ID, firstName: String!, lastName: String) : Author!
+    deleteAuthor(id: ID) : String!
+    createBook(name: String!, pageCount: Int, authorId: ID) : Book!
+}
